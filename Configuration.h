@@ -147,9 +147,9 @@
 #define ENDSTOP_Y_MIN_INVERTING true
 #define MIN_HARDWARE_ENDSTOP_Y true
 
-#define ENDSTOP_PULLUP_Z_MIN false
-#define ENDSTOP_Z_MIN_INVERTING false
-#define MIN_HARDWARE_ENDSTOP_Z false
+#define ENDSTOP_PULLUP_Z_MIN true
+#define ENDSTOP_Z_MIN_INVERTING true
+#define MIN_HARDWARE_ENDSTOP_Z true
 
 #define ENDSTOP_PULLUP_X_MAX true
 #define ENDSTOP_X_MAX_INVERTING true
@@ -167,12 +167,12 @@
 
 #define min_software_endstop_x true
 #define min_software_endstop_y true
-#define min_software_endstop_z false
+#define min_software_endstop_z true
 #define max_software_endstop_x true
 #define max_software_endstop_y true
 #define max_software_endstop_z true
 
-#define ENDSTOP_X_BACK_MOVE 5
+#define ENDSTOP_X_BACK_MOVE 5  
 #define ENDSTOP_Y_BACK_MOVE 5
 #define ENDSTOP_Z_BACK_MOVE 2
 #define ENDSTOP_X_RETEST_REDUCTION_FACTOR 3
@@ -200,7 +200,7 @@
 #define Z_HOME_DIR -1
 #define X_MAX_LENGTH 200
 #define Y_MAX_LENGTH 200
-#define Z_MAX_LENGTH 150
+#define Z_MAX_LENGTH 180 // tem que tar certin... senao zica o Z-probe
 #define X_MIN_POS 0
 #define Y_MIN_POS 0
 #define Z_MIN_POS 0
@@ -282,7 +282,7 @@
  Servos are controlled by a pulse width normally between 500 and 2500 with 1500ms in center position. 0 turns servo off.
  WARNING: Servos can draw a considerable amount of current. Make sure your system can handle this or you may risk your hardware!
  */
-#define FEATURE_SERVO 0
+#define FEATURE_SERVO 1
 #define SERVO0_PIN 11
 #define SERVO1_PIN -1
 #define SERVO2_PIN -1
@@ -291,21 +291,25 @@
 
 // #################### Z-Probing #####################
 
-#define FEATURE_Z_PROBE 0
+#define FEATURE_Z_PROBE true
 #define Z_PROBE_BED_DISTANCE 10
-#define Z_PROBE_PIN -1
-#define Z_PROBE_PULLUP 0
-#define Z_PROBE_ON_HIGH 0
-#define Z_PROBE_X_OFFSET 0
-#define Z_PROBE_Y_OFFSET 0
-#define Z_PROBE_WAIT_BEFORE_TEST 0
-#define Z_PROBE_SPEED 2
-#define Z_PROBE_XY_SPEED 150
+#define Z_PROBE_PIN ORIG_Z_MIN_PIN
+#define Z_PROBE_PULLUP true
+#define Z_PROBE_ON_HIGH false
+#define Z_PROBE_X_OFFSET 14
+#define Z_PROBE_Y_OFFSET 94
+// Waits for a signal to start. Valid signals are probe hit and ok button.
+// This is needful if you have the probe trigger by hand.
+#define Z_PROBE_WAIT_BEFORE_TEST false
+/** Speed of z-axis in mm/s when probing */
+#define Z_PROBE_SPEED 0.8
+#define Z_PROBE_XY_SPEED 50
 #define Z_PROBE_SWITCHING_DISTANCE 1
 #define Z_PROBE_REPETITIONS 1
-#define Z_PROBE_HEIGHT 40
-#define Z_PROBE_START_SCRIPT ""
-#define Z_PROBE_FINISHED_SCRIPT ""
+/** The height is the difference between activated probe position and nozzle height. */
+#define Z_PROBE_HEIGHT 7.2
+#define Z_PROBE_START_SCRIPT "M340 P0 S1500"
+#define Z_PROBE_FINISHED_SCRIPT "M340 P0 S500\nM340 P0 S0"
 #define FEATURE_AUTOLEVEL 1
 #define Z_PROBE_X1 20
 #define Z_PROBE_Y1 20
